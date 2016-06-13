@@ -1,0 +1,61 @@
+.backgr {
+	background: url(../img/compass.png)no-repeat center center;
+	min-height: 250px;
+	padding-top: 10px;
+}
+
+.title_header{
+	padding-top: 95px;
+	font-size: 2.5em;
+	color: #fff;
+}
+.title_header_two{
+	padding-top: 20px;
+	font-size: 2em;
+	color: #fff;
+}
+.font_icon{
+	font-size: 4em;
+	display: inline;
+}
+.font_icon_big{
+	font-size: 10em;
+	display: inline;
+}
+/*CSSMENU style*/
+.submenu_opacity{
+	opacity: 0.95;
+	filter: alpha(opacity=95); /* For IE8 and earlier */
+}
+.background-lighterblue{
+	background-color: #f7fbff;
+}
+.background-lightblue{
+	background-color: #deebf7;
+}
+.prezentare{
+	padding: 20px;
+}
+.social_icon{
+	font-size: 20px;
+}
+.shadow_icon{
+	color:#000;
+}
+.shadow_icon:hover{
+	color: #08306b;
+	text-shadow: 1px 1px 3px #000;
+}
+.list_style{
+	margin-left: 30px;
+}
+/*TABLE*/
+table, tr, td{
+	border: 1px solid black;
+	background-color: #deebf7;
+}
+
+table{
+	width:100%;
+	border: 2px solid black;
+}
