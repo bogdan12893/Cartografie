@@ -117,17 +117,15 @@
 													$gasit = false;
 												foreach ($interogare->fetchAll() as $linie) {
 												if (($n== $linie['nume'])&& ($p== $linie['parola'])) {
-												echo "<h1 class=\"italic centrat\"><span class=\"literaitalic\">S</span>unteti autorizat</h1><br />";
-												echo "<form class=\"centrat\" method=\"post\"action=\"adaugare.php\">";
-												echo "<input type=\"submit\" name=\"submit1\"value=\"Adaugare\">";
-												echo "</form></center>";
+												echo "<h3>Sunteti autorizat</h3>";
+
 												$gasit = true;
 												break;
 											}
 											}
 											if(!$gasit) {
-												echo "<h1 class=\"italic centrat\"><span class=\"literaitalic\">NU</span> aveti acces in baza de date</h1><br/>";
-												echo "<form class=\"centrat\"><input type=buttonvalue=\"Mai incearca\"onClick=\"location.href='login.html'\"></form></center>";
+												echo "<a href='login.html'><span style='color:#BF4949; font-size: 20px; line-height: 40px; magin: 10px;'> Datele introduse sunt gresite. Incercati din nou.</a></span>";
+
 											}
 
 											$cnx = null;
@@ -157,6 +155,12 @@
 								</div>
 						</article>
 				</section>
+		<hr class="line">
+		<hr class="line">
+		<hr class="line">
+		<hr class="line">
+		<hr class="line">
+		<hr class="line">
 		<hr class="line">
 		<!--////////////////////////////////////Footer-->
 		<footer>
