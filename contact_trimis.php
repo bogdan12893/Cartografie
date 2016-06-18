@@ -69,8 +69,8 @@
 				  </ul>
 			   </li>
 
-			  <li class="active"><a href='login.html'><span>Login</span></a></li>
-			   <li class='last'><a href='contact.html'><span>Contact</span></a></li>
+			  <li><a href='login.html'><span>Login</span></a></li>
+			   <li class='last active'><a href='contact.html'><span>Contact</span></a></li>
 			</ul>
 		</div>
 	</header>
@@ -84,7 +84,7 @@
 								<div class="row">
 										<div class="wrap-col post">
 											<div style="padding-bottom: 10px; font-size: 5em;">
-												<h1 class = "clg clg-identification28"></h1>
+												<h1 class = "clg clg-planet-earth5"></h1>
 										</div>
 									</div>
 								</div>
@@ -95,41 +95,39 @@
 			<div class="wrap-container clearfix">
 				<div id="main-content">
 					<div class="wrap-content zerogrid ">
-						<article class="background-lightblue">
-								<div class="prezentare">
-									<h1>Authentificare</h1>
-								</div>
+						<div class='embed-container maps'>
+							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2732.981411764103!2d23.57797511584455!3d46.765262853707455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0xde67aaab3485354e!2sFaculty+of+Geography!5e0!3m2!1sen!2sro!4v1465729344669" width="100%" height="370px" frameborder="0" style="border: 0"></iframe>	
+						</div>
+						<article class="background-gray">
 							<div class="art-content">
 								<div class="row">
-									<div id="contact_form">
-										<form name="formular" id="ff" method="post" action="login_verificare.php">
-											<label class="row">
-												<div class="col-1-3">
-													<div class="wrap-col">
-														<p>Nume: </p>
-													</div>
-												</div>
-												<div class="col-1-2">
-													<div class="wrap-col">
-														<input type="text" name="nume" placeholder="Nume" required="required" />
-													</div>
-												</div>
-												<hr class="line">
-												<div class="col-1-3">
-													<div class="wrap-col">
-														<p>Parola: </p>
-													</div>
-												</div>
-												<div class="col-1-2">
-													<div class="wrap-col">
-														<input type="password" name="parola" placeholder="Parola" required="required" />
-													</div>
-												</div>
-											</label>
-												<hr class="line">
-											<center><input class="sendButton" type="submit" name="trimite" value="Logare"></center>
-										</form>
-									</div>
+									<?php
+										function testare($data) {
+											$data = trim($data);
+											$data = stripslashes($data);
+											$data = htmlspecialchars($data);
+											return $data;
+											}
+
+										$nume=testare($_REQUEST["nume"]);
+										$email=testare($_REQUEST["email"]);
+										$titlu=testare($_REQUEST["titlu"]);
+										$mesaj=testare($_REQUEST["mesaj"]);
+										try {
+											$cnx = new
+											PDO("mysql:host=localhost;charset=utf8;dbname=cartografie","root", "");
+											$interogare = $cnx->prepare("INSERT INTO mesaje (nr, nume,
+											email, titlu, mesaj)VALUES ('', '$nume','$email',
+											'$titlu', '$mesaj')");
+											$interogare->execute();
+
+											echo "<h1>Mesajul dv. a fost trimis <br /> Va multumim!</h1><br />";
+											echo "<br /><br /><br /><br />";
+										}
+										catch(PDOException $e) {
+											die("Conectare imposibila: " . $e->getMessage());
+										}
+									?>
 								</div>
 							</div>
 						</article>
@@ -137,22 +135,8 @@
 				</div>
 			</div>
 		</section>
-			<section class="content-box zerogrid">
-			<div class="wrap-container clearfix">
-				<div id="main-content">
-					<div class="wrap-content zerogrid ">
-						<article class="background-lighterblue">
-							<div class="art-content">
-								<div class="row">
-										<div class="wrap-col post">
-											<div style="padding-bottom: 90px">
-										</div>
-									</div>
-								</div>
-						</article>
-				</section>
 		<hr class="line">
-		<!--////////////////////////////////////Footer-->
+				<!--////////////////////////////////////Footer-->
 		<footer>
 			<div class="wrap-footer">
 				<div class="zerogrid">
@@ -177,6 +161,18 @@
 			</div>
 		</footer>
 	<script src="js/lightbox-plus-jquery.min.js"></script>
+
+	<!-- Google Map -->
+	<script>
+		$('.maps').click(function () {
+		$('.maps iframe').css("pointer-events", "auto");
+	});
+
+	$( ".maps" ).mouseleave(function() {
+	  $('.maps iframe').css("pointer-events", "none"); 
+	});
+	</script>
+	
 </div>
 </body>
 </html>

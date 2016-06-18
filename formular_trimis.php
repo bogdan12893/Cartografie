@@ -56,7 +56,7 @@
 		<div id='cssmenu' class="align-center">
 			<ul>
 			   <li><a href='index.html'><span>Home</span></a></li>
-			   <li class='has-sub'><a href='informatii.html'><span>Informatii</span></a>
+			   <li class='has-sub active'><a href='informatii.html'><span>Informatii</span></a>
 				  <ul class="submenu_opacity">
 					 <li><a href='formular_inscriere.html'><span>Formular de Inscriere</span></a></li>
 					 <li><a href='activitati.html'><span>Activitati</span></a></li>
@@ -69,7 +69,7 @@
 				  </ul>
 			   </li>
 
-			  <li class="active"><a href='login.html'><span>Login</span></a></li>
+			  <li><a href='login.html'><span>Login</span></a></li>
 			   <li class='last'><a href='contact.html'><span>Contact</span></a></li>
 			</ul>
 		</div>
@@ -84,10 +84,10 @@
 								<div class="row">
 										<div class="wrap-col post">
 											<div style="padding-bottom: 10px; font-size: 5em;">
-												<h1 class = "clg clg-identification28"></h1>
+												<h1 class = "clg clg-writing45"></h1>
 										</div>
 									</div>
-								</div>
+							</div>
 						</article>
 				</section>
 		<!--////////////////////////////////////Container-->
@@ -96,40 +96,42 @@
 				<div id="main-content">
 					<div class="wrap-content zerogrid ">
 						<article class="background-lightblue">
-								<div class="prezentare">
-									<h1>Authentificare</h1>
-								</div>
 							<div class="art-content">
 								<div class="row">
-									<div id="contact_form">
-										<form name="formular" id="ff" method="post" action="login_verificare.php">
-											<label class="row">
-												<div class="col-1-3">
-													<div class="wrap-col">
-														<p>Nume: </p>
-													</div>
-												</div>
-												<div class="col-1-2">
-													<div class="wrap-col">
-														<input type="text" name="nume" placeholder="Nume" required="required" />
-													</div>
-												</div>
-												<hr class="line">
-												<div class="col-1-3">
-													<div class="wrap-col">
-														<p>Parola: </p>
-													</div>
-												</div>
-												<div class="col-1-2">
-													<div class="wrap-col">
-														<input type="password" name="parola" placeholder="Parola" required="required" />
-													</div>
-												</div>
-											</label>
-												<hr class="line">
-											<center><input class="sendButton" type="submit" name="trimite" value="Logare"></center>
-										</form>
-									</div>
+									<?php
+										function testare($data) {
+											$data = trim($data);
+											$data = stripslashes($data);
+											$data = htmlspecialchars($data);
+											return $data;
+											}
+
+										$nume=testare($_REQUEST["nume"]);
+										$prenume=testare($_REQUEST["prenume"]);
+										$cnp=testare($_REQUEST["cnp"]);
+										$telefon=testare($_REQUEST["telefon"]);
+										$judet=testare($_REQUEST["judet"]);
+										$localitate=testare($_REQUEST["localitate"]);
+										$email=testare($_REQUEST["email"]);
+										$facultate=testare($_REQUEST["facultate"]);
+										try {
+											$cnx = new
+											PDO("mysql:host=localhost;charset=utf8;dbname=cartografie","root", "");
+											$interogare = $cnx->prepare("INSERT INTO formular (nr, nume,
+											prenume, cnp, telefon, judet, localitate, email, facultate)VALUES ('', '$nume','$prenume',
+											'$cnp', '$telefon', '$judet', '$localitate', '$email', '$facultate')");
+											$interogare->execute();
+
+											echo "<h1>Formularul s-a trimis cu succes!</h1>";
+											echo "<p>In urmatoarele zile veti primii un mail cu noul dv. cont pentru a putea vizualiza situatia scolara cat si alte informatii.</p>";
+											echo "<h3>Va multumim!</h3>";
+											echo "<br /><br /><br /><br />";
+
+										}
+										catch(PDOException $e) {
+											die("Conectare imposibila: " . $e->getMessage());
+										}
+										?>
 								</div>
 							</div>
 						</article>
